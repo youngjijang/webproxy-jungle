@@ -5,6 +5,36 @@
 #include "csapp.h"
 
 int main(void) {
+  char *buf, *p;
+  char arg1[MAXLINE], arg2[MAXLINE], content[MAXLINE];
+  int num1 = 0, num2 = 0;
+
+  if((buf = getenv("QUERY_STRING")) != NULL){
+    p = strchr(buf, '&');
+    *p = '\0';
+    // strcpy(arg1,buf);
+    // strcpy(arg2, p+1);
+    // num1 = atoi(arg1);
+    // num2 = atoi(arg2);
+    sscanf(buf, "num1=%d", &num1);
+    sscanf(p+1, "num2=%d", &num2);
+    
+  }
+
+  /* Make the responese body */
+  sprintf(content, "QUERY_STRING=%s", buf);
+  sprintf(content, "Welcome to add.com: ");
+  sprintf(content, "%sTHE internet addition portal. \r\n<p>", content);
+  sprintf(content, "%sThe answer is: %d + %d = %d\r\n<p>", content, num1,num2,num1+num2);
+  sprintf(content, "%sThanks for visiting!\r\n", content);
+
+  /* Generate the HTTP responese */
+  printf("Connection: close\r\n");
+  printf("Content-length: %d\r\n",(int)strlen(content));
+  printf("Content-type: text/html\r\n\r\n");
+  printf("%s",content);
+  fflush(stdout);
+
   exit(0);
 }
 /* $end adder */
