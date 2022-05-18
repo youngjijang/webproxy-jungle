@@ -7,7 +7,7 @@
 int main(void) {
   char *buf, *p;
   char arg1[MAXLINE], arg2[MAXLINE], content[MAXLINE];
-  int num1 = 0, num2 = 0;
+  int num1 = 1, num2 = 1;
 
   if((buf = getenv("QUERY_STRING")) != NULL){
     p = strchr(buf, '&');
